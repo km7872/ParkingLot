@@ -28,20 +28,20 @@ namespace ParkingLotLib
             return availableSpots;
         }
 
-        public bool Enter(string licensePlate)
-        {
-            if (availableSpots.Count >= 1)
+        public void Enter(string licensePlate)
+        {            
+            if (availableSpots.Count > 0)
             {
-                Spot item = availableSpots[availableSpots.Count-1];
+                Spot item = availableSpots[availableSpots.Count - 1];
                 item.SetOccupied(true);
                 carMap[licensePlate] = item;
-                availableSpots.RemoveAt(availableSpots.Count-1);
-                return true;
+                availableSpots.RemoveAt(availableSpots.Count - 1);
             }
-            return false;
+            throw new Exception("No available spots at this moment");
+            
         }
 
-        public bool Exit(string licensePlate)
+        public void Exit(string licensePlate)
         {
             if (carMap.ContainsKey(licensePlate))
             {
@@ -50,10 +50,9 @@ namespace ParkingLotLib
                 item.SetOccupied(false);
                 availableSpots.Add(item);
                 carMap.Remove(licensePlate);
-                return true;
             }
 
-            return false;
+            throw new Exception("Vehicle not found");
         }
     }
 }

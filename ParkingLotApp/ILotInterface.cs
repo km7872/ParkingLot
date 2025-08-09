@@ -6,9 +6,9 @@ namespace ParkingLotLib
 
         List<Spot> GetAvailableSpots();
 
-        bool Enter(string licensePlate);
+        void Enter(string licensePlate);
 
-        bool Exit(string licensePlate);
+        void Exit(string licensePlate);
 
     }
 }
